@@ -1,0 +1,17 @@
+mkdir-p include
+cp math330.h include
+mkdir-p lib
+cd trig
+	
+lib: cos330.o sin330.o tan330.o
+	ar r libtrig.a cos330.o sin330.o tan330.o
+
+cos330.o: cos330.c
+	gcc -c cos330.c
+sin330.o: sin330.c
+	gcc -c sin330.c
+tan330.o: tan330.c
+	gcc -c tan330.c
+
+
+

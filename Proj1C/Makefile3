@@ -1,0 +1,28 @@
+SOURCES = ./trig/cos330.c ./trig/sin330.c ./trig/tan330.c
+OBJECTS = $(SOURCES:.c=.o)
+CLI = ./cli/cli.c
+
+top: $(CLI) lib $(OBJECTS) make_dirs 
+	gcc $(CLI) -I./include -L/lib
+
+lib: $(OBJECTS)
+	ar r libtrig.a $(OBJECTS)
+	cp libtrig.a ./include
+	cp libtrig.a 
+	
+
+$(OBJECTS): $(SOURCES) make_dirs
+	gcc -c $(SOURCES) -I./include
+
+make_dirs:
+	mkdir -p ./include
+	cp math330.h ./include
+	mkdir -p ./lib
+	mkdir -p ./bin
+
+clean:
+	rm -r ./include
+	rm -r ./lib
+	rm -r ./bin
+	rm *.o
+	rm libmath330.a
